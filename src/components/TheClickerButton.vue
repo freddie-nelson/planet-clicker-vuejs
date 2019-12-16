@@ -49,13 +49,12 @@ export default {
 
 <style scoped lang="scss">
     .clicker-button {
-        width: 100%;
+        width: 90%;
         max-width: 650px;
         height: 100%;
         margin: auto;
         cursor: pointer;
         position: relative;
-        margin: 0 20px;
         -webkit-tap-highlight-color: rgba(0,0,0,0);
 
         &::before {
