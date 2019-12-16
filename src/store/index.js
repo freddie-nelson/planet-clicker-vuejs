@@ -5,6 +5,11 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    player: {
+      planetsCounter: 100000,
+      planetsPerSecond: 0,
+      planetsPerClick: 1
+    },
   },
   mutations: {
   },
