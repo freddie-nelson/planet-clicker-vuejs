@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import uuid from "uuid";
 import ClickerPlanetItem from "./ClickerPlanetItem";
 
 export default {
@@ -33,15 +32,16 @@ export default {
             let x = e.clientX - ele.left;
             let y = e.clientY - ele.top;
 
-            this.clickerPlanetItems.push({show: true, id: uuid(), x: x, y: y });
+            this.clickerPlanetItems.push({show: true, x: x, y: y });
         }
     },
     created() {
         setTimeout(setInterval(() => {
             if (this.clickerPlanetItems.length === 0) {
                 return;
+            } else {
+                this.clickerPlanetItems = this.clickerPlanetItems.filter(item => item.show === true)
             }
-            this.clickerPlanetItems = this.clickerPlanetItems.filter(item => item.show === true)
         }, 1000), 2000)
     }
 }
@@ -51,10 +51,12 @@ export default {
     .clicker-button {
         width: 100%;
         max-width: 650px;
-        height: 650px;
+        height: 100%;
         margin: auto;
         cursor: pointer;
         position: relative;
+        margin: 0 20px;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
 
         &::before {
             content: "";
