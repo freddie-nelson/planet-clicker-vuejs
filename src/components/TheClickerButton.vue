@@ -19,12 +19,19 @@ export default {
     },
     data() {
         return {
-            clickerPlanetItems: []
+            clickerPlanetItems: [],
+            timeOfLastClick: 0,
+            timeSinceLastClick: 0
         }
     },
     methods: {
         clickPlanet(e) {
             this.getMousePosition(e);
+            const time = new Date().getTime()
+
+            this.timeSinceLastClick = (this.timeOfLastClick - time) * -1;
+            this.timeOfLastClick = time;
+
             this.$store.state.player.planetsCounter += this.$store.state.player.planetsPerClick;
         },
         getMousePosition(e) {
@@ -37,12 +44,20 @@ export default {
     },
     created() {
         setTimeout(setInterval(() => {
-            if (this.clickerPlanetItems.length === 0) {
-                return;
-            } else {
+            if (this.clickerPlanetItems.length >= 100) {
+
                 this.clickerPlanetItems = this.clickerPlanetItems.filter(item => item.show === true)
+
+            } else if (this.clickerPlanetItems.length === 0 || this.timeSinceLastClick  < 800) {
+
+                return;
+
+            } else {
+
+                this.clickerPlanetItems = this.clickerPlanetItems.filter(item => item.show === true)
+
             }
-        }, 1000), 2000)
+        }, 2000), 2000)
     }
 }
 </script>
@@ -51,7 +66,7 @@ export default {
     .clicker-button {
         width: 90%;
         max-width: 650px;
-        height: 100%;
+        height: 90vw;
         margin: auto;
         cursor: pointer;
         position: relative;
