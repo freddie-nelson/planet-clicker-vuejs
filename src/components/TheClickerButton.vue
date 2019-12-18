@@ -27,10 +27,8 @@ export default {
     methods: {
         clickPlanet(e) {
             this.getMousePosition(e);
-            const time = new Date().getTime()
 
-            this.timeSinceLastClick = (this.timeOfLastClick - time) * -1;
-            this.timeOfLastClick = time;
+            this.timeOfLastClick = new Date().getTime();
 
             this.$store.state.player.planetsCounter += this.$store.state.player.planetsPerClick;
         },
@@ -44,6 +42,8 @@ export default {
     },
     created() {
         setTimeout(setInterval(() => {
+            this.timeSinceLastClick = (this.timeOfLastClick - new Date().getTime()) * -1;
+
             if (this.clickerPlanetItems.length >= 100) {
 
                 this.clickerPlanetItems = this.clickerPlanetItems.filter(item => item.show === true)
@@ -57,7 +57,7 @@ export default {
                 this.clickerPlanetItems = this.clickerPlanetItems.filter(item => item.show === true)
 
             }
-        }, 2000), 2000)
+        }, 1000), 2000)
     }
 }
 </script>
