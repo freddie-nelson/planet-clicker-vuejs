@@ -27,6 +27,7 @@ export default {
     methods: {
         clickPlanet(e) {
             this.getMousePosition(e);
+            this.$refs.clickSound.play();
 
             this.timeOfLastClick = new Date().getTime();
 
@@ -44,7 +45,7 @@ export default {
         setTimeout(setInterval(() => {
             this.timeSinceLastClick = (this.timeOfLastClick - new Date().getTime()) * -1;
 
-            if (this.clickerPlanetItems.length >= 100) {
+            if (this.clickerPlanetItems.length >= 300) {
 
                 this.clickerPlanetItems = this.clickerPlanetItems.filter(item => item.show === true)
 
@@ -67,6 +68,7 @@ export default {
         width: 90%;
         max-width: 650px;
         height: 90vw;
+        max-height: 650px;
         margin: auto;
         cursor: pointer;
         position: relative;

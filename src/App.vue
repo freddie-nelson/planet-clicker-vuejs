@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   * {
     box-sizing: border-box;
     margin: 0;
@@ -30,8 +30,33 @@ export default {
     overflow: hidden;
   }
 
+  h1 {
+    color: white;
+  }
+
   #app {
     display: flex;
-    height: 100%;
+    height: 100vh;
+    
+    &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        z-index: -1;
+        background: url('./assets/images/space-bg.jpg') repeat center;
+        background-size: contain;
+        animation: space-bg-anim infinite linear 100s;
+    }
+  }
+
+  @keyframes space-bg-anim {
+    from {
+      background-position: 0;
+    }
+
+    to {
+      background-position: 100vw;
+    }
   }
 </style>
